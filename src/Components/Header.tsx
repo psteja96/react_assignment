@@ -37,6 +37,7 @@ import {
     Palette as PreferencesIcon
 } from '@mui/icons-material';
 import DummyComponent from "../Screen/DummyComponent.tsx";
+import MultiStepForm from "../Screen/Container.tsx";
 
 // Define TypeScript interfaces
 interface NavItem {
@@ -55,45 +56,6 @@ interface NavSection {
 
 // Content Components
 
-const ProfileSetupComponent = () => (
-    <Box>
-        <Typography variant="h5" gutterBottom>Profile Setup</Typography>
-        <Typography paragraph>
-            Complete your profile to unlock all features of our platform. Add your personal and
-            professional information.
-        </Typography>
-
-        <Paper sx={{ p: 3, mt: 3, maxWidth: 600 }}>
-            <Stack direction="row" spacing={3} alignItems="center" mb={3}>
-                <Avatar sx={{ width: 80, height: 80 }} src="/avatar-placeholder.png" />
-                <Box>
-                    <Typography variant="h6">John Doe</Typography>
-                    <Typography variant="body2" color="textSecondary">johndoe@example.com</Typography>
-                    <Typography variant="body2" color="textSecondary">+1 (555) 123-4567</Typography>
-                </Box>
-            </Stack>
-
-            <Box component="form" sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                <Box>
-                    <Typography variant="subtitle2" gutterBottom>Full Name</Typography>
-                    <Paper variant="outlined" sx={{ p: 1.5, borderRadius: 1 }}>John Doe</Paper>
-                </Box>
-                <Box>
-                    <Typography variant="subtitle2" gutterBottom>Email</Typography>
-                    <Paper variant="outlined" sx={{ p: 1.5, borderRadius: 1 }}>johndoe@example.com</Paper>
-                </Box>
-                <Box>
-                    <Typography variant="subtitle2" gutterBottom>Phone</Typography>
-                    <Paper variant="outlined" sx={{ p: 1.5, borderRadius: 1 }}>+1 (555) 123-4567</Paper>
-                </Box>
-                <Box>
-                    <Typography variant="subtitle2" gutterBottom>Location</Typography>
-                    <Paper variant="outlined" sx={{ p: 1.5, borderRadius: 1 }}>San Francisco, CA</Paper>
-                </Box>
-            </Box>
-        </Paper>
-    </Box>
-);
 
 const NestedSidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(true);
@@ -164,7 +126,9 @@ const NestedSidebar = () => {
                     id: 'profile-setup',
                     name: 'Profile Setup',
                     icon: <ProfileIcon fontSize="small" />,
-                    component: <ProfileSetupComponent />
+                    component:
+
+                        <MultiStepForm />
                 },
                 {
                     id: 'view-profile',
@@ -388,6 +352,7 @@ const NestedSidebar = () => {
                 height: '100vh',
                 backgroundColor: '#f8f9fa',
                 marginTop:"5%",
+                marginInline: "auto !important",
                 marginLeft: `${activeSection ? 304 : 64}px`,
                 transition: theme.transitions.create('margin', {
                     easing: theme.transitions.easing.easeOut,
@@ -409,17 +374,7 @@ const NestedSidebar = () => {
                         {activeNavItem?.name || 'Dashboard'}
                     </Typography>
 
-                    <Box display="flex" alignItems="center" gap={2}>
-                        <IconButton>
-                            <Badge badgeContent={4} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <Box display="flex" alignItems="center" gap={1}>
-                            <Avatar sx={{ width: 36, height: 36 }}>JD</Avatar>
-                            <Typography>John Doe</Typography>
-                        </Box>
-                    </Box>
+
                 </Box>
 
                 {/* Content Area */}
@@ -444,42 +399,14 @@ const NestedSidebar = () => {
                             <Typography variant="h4" gutterBottom sx={{ color: theme.palette.primary.main }}>
                                 Welcome to the Dashboard
                             </Typography>
-                            <Typography variant="body1" paragraph>
-                                Select a section from the sidebar to get started. Click on any icon to view its related items.
-                            </Typography>
-                            <Box sx={{
-                                mt: 4,
-                                p: 3,
-                                backgroundColor: theme.palette.grey[100],
-                                borderRadius: 1,
-                                textAlign: 'left'
-                            }}>
-                                <Typography variant="h6" gutterBottom>
-                                    How to navigate:
-                                </Typography>
-                                <ul>
-                                    <li><Typography variant="body1">Click any icon in the main sidebar to open a category</Typography></li>
-                                    <li><Typography variant="body1">Select an item from the secondary sidebar to view its content</Typography></li>
-                                    <li><Typography variant="body1">Use the back arrow to return to the icon view</Typography></li>
-                                    <li><Typography variant="body1">The collapse/expandbutton toggles the main sidebar</Typography></li>
-                                </ul>
-                            </Box>
+
+
                         </Box>
                     )}
                 </Box>
 
                 {/* Footer */}
-                <Box sx={{
-                    py: 2,
-                    px: 3,
-                    backgroundColor: 'white',
-                    borderTop: `1px solid ${theme.palette.divider}`,
-                    textAlign: 'center'
-                }}>
-                    <Typography variant="body2" color="textSecondary">
-                        © 2023 Dashboard UI. All rights reserved.
-                    </Typography>
-                </Box>
+
             </Box>
         </Box>
     );
